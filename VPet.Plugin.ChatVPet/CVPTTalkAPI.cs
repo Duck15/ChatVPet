@@ -84,13 +84,13 @@ namespace VPet.Plugin.ChatVPet
         //{
         //    return int.Max(7, (int)Math.Sqrt(like / 16) - 2);
         //}
-        public override void Responded(string content)
+        public override void Responded(string content) // 处理响应内容
         {
             if (string.IsNullOrEmpty(content))
             {
                 return;
             }
-            DisplayThink();
+            DisplayThink(); // 显示思考动画
             if (Plugin.CGPTClient == null)
             {
                 DisplayThinkToSayRnd("请先前往设置中设置 GPT API".Translate());
@@ -104,7 +104,7 @@ namespace VPet.Plugin.ChatVPet
                 {
                     if (pr.IsError)
                     {
-                        Plugin.MW.Main.LabelDisplayShow("VCP报错: ".Translate() + pr.Reply);
+                        Plugin.MW.Main.LabelDisplayShow("VCP报错: ".Translate() + pr.Reply); // 显示错误消息弹窗Label
                     }
                     else if (!string.IsNullOrWhiteSpace(pr.Reply))
                     {
@@ -158,7 +158,8 @@ namespace VPet.Plugin.ChatVPet
                 {
                     str = "请检查API token设置".Translate();
                 }
-                DisplayThinkToSayRnd("API调用失败".Translate() + $",{str}\n{e}");//, GraphCore.Helper.SayType.Serious);
+                DisplayThinkToSayRndAutoNoForce("API调用失败".Translate() + $",{str}\n{e}");//, GraphCore.Helper.SayType.Serious);
+                Plugin.MW.Main.LabelDisplayShow("API调用失败".Translate() + $",{str}\n{e}"); // 显示错误消息弹窗Label
             }
         }
         bool istalksuccess = false;
