@@ -160,6 +160,7 @@ namespace VPet.Plugin.ChatVPet
                 }
                 DisplayThinkToSayRndAutoNoForce("API调用失败".Translate() + $",{str}\n{e}"); //, GraphCore.Helper.SayType.Serious);
                 MessageBox.Show("API调用失败".Translate() + $",{str}\n{e}"); // 显示错误消息弹窗
+                Dispatcher.Invoke(() => this.IsEnabled = true); // 恢复按钮可用状态
             }
         }
         bool istalksuccess = false;
