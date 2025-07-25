@@ -93,7 +93,7 @@ namespace VPet.Plugin.ChatVPet
             DisplayThink(); // 显示思考动画
             if (Plugin.CGPTClient == null)
             {
-                DisplayThinkToSayRnd("请先前往设置中设置 GPT API".Translate());
+                MessageBox.Show("请先前往设置中设置 GPT API".Translate());
                 return;
             }
             Dispatcher.Invoke(() => this.IsEnabled = false);
@@ -104,7 +104,7 @@ namespace VPet.Plugin.ChatVPet
                 {
                     if (pr.IsError)
                     {
-                        Plugin.MW.Main.LabelDisplayShow("VCP报错: ".Translate() + pr.Reply); // 显示错误消息弹窗Label
+                        MessageBox.Show("VCP报错: ".Translate() + pr.Reply); // 显示错误消息弹窗Label
                     }
                     else if (!string.IsNullOrWhiteSpace(pr.Reply))
                     {
@@ -130,7 +130,7 @@ namespace VPet.Plugin.ChatVPet
                         {
                             string? model = Plugin.CGPTClient.Completions["vpet"].model?.ToLower();
                             if (string.IsNullOrWhiteSpace(model) || !model.Contains("gpt-4") || !model.Contains("o1") || !model.Contains("pro") ||
-                            !model.Contains("plus") || !model.Contains("max"))//确保提交质量
+                            !model.Contains("plus") || !model.Contains("max"))//确保提交质量 
                                 return;
 
                             string[]? msg = Plugin.VPetChatProcess.Dialogues.LastOrDefault()?.ToMessages(Plugin.VPetChatProcess.Localization);
@@ -158,8 +158,8 @@ namespace VPet.Plugin.ChatVPet
                 {
                     str = "请检查API token设置".Translate();
                 }
-                DisplayThinkToSayRndAutoNoForce("API调用失败".Translate() + $",{str}\n{e}");//, GraphCore.Helper.SayType.Serious);
-                Plugin.MW.Main.LabelDisplayShow("API调用失败".Translate() + $",{str}\n{e}"); // 显示错误消息弹窗Label
+                DisplayThinkToSayRndAutoNoForce("API调用失败".Translate() + $",{str}\n{e}"); //, GraphCore.Helper.SayType.Serious);
+                MessageBox.Show("API调用失败".Translate() + $",{str}\n{e}"); // 显示错误消息弹窗
             }
         }
         bool istalksuccess = false;
